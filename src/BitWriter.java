@@ -1,9 +1,9 @@
 import java.io.FileOutputStream;
-import java.io.RandomAccessFile;
-import java.nio.ByteBuffer;
 
 /**
- * Created by valkertok on 30.03.15.
+ * authot:  Adrian Kuta
+ * index:   204423
+ * date:    30.03.15
  */
 public class BitWriter {
     private static int offset = 0, byteNumber = 0;
