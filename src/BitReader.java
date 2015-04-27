@@ -8,16 +8,14 @@ import java.nio.channels.FileChannel;
  * date:    28.03.15
  */
 public class BitReader {
+    byte symbol;
     private int offset = 0, byteNumber = 0;
-
-    private RandomAccessFile aFile;
     private FileChannel inChannel;
     private ByteBuffer buffer;
-    byte symbol;
 
     public BitReader(String filePath){
         try{
-            aFile = new RandomAccessFile(filePath, "r");
+            RandomAccessFile aFile = new RandomAccessFile(filePath, "r");
             inChannel = aFile.getChannel();
             buffer = ByteBuffer.allocate(1024);
 
@@ -28,7 +26,7 @@ public class BitReader {
     }
 
     public int ReadBit(){
-        int result = 0;
+        int result;
         if(byteNumber == buffer.limit() && byteNumber < 1024){
             //System.out.println(byteNumber);
             //System.out.println(buffer.limit());
@@ -58,23 +56,6 @@ public class BitReader {
         }
         result = (symbol & (1 << (7 - offset))) >> (7 - offset);
         offset++;
-        return result;
-    }
-
-    public int ReadByte(){
-        int result = 0, resultOffset = 0;
-
-        for(int i = 0; i < 8; i++){
-            int bit = this.ReadBit();
-            if(bit == 1){
-                result = result | (1 << (7 - resultOffset));
-                resultOffset++;
-            } else if(bit == 0){
-                resultOffset++;
-            } else {
-                return result;
-            }
-        }
         return result;
     }
 }

@@ -7,7 +7,7 @@ public class Lista4Odkodowanie {
     public static long totalCount = 0x00000000FFFFFFFFL;
     public static long lower, upper, tag;
     public static long totalNumberOfCharacters = 256;
-    static int i = 0;
+
     public static void main(String args[]) {
         if (args.length != 2)
             System.out.println("Podaj nazwe pliku input i output.");
@@ -122,7 +122,7 @@ public class Lista4Odkodowanie {
     public static long readNextBit(long tag, BitReader br){
         long bit = br.ReadBit();
         if(bit == -1)   {
-            return ((tag << 1) & totalCount) + 0;
+            return (tag << 1) & totalCount;
         }
         else            return ((tag << 1) & totalCount) + bit;
     }
