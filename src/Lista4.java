@@ -16,11 +16,7 @@ public class Lista4 {
     public static long lower, upper, previousLow, range, Length, scale3;
 
     public static void main(String args[]) {
-        if (args.length != 2)
-            System.out.println("Podaj nazwe pliku input i output.");
-        else {
-            encodeFile(args[0], args[1]);
-        }
+        encodeFile("test.txt", "test");
     }
 
     public static void encodeFile(String inputFileName, String outputFileName) {
@@ -51,7 +47,7 @@ public class Lista4 {
             File outFile = new File(outputFileName);
             System.out.println();
             System.out.println("Stopien kompresji: " + (1 - ((double) outFile.length() / (double) inFile.length())) * 100 + "%");
-            System.out.println("Average Length of Codes: " + (double) totalLengthOfCodes / (double) numOfCodes);
+            System.out.println("Średnia długość słowa: " + (double) totalLengthOfCodes / (double) numOfCodes);
             System.out.println("Entropy: \t\t\t" + calculateEntropy());
             inChannel.close();
             aFile.close();

@@ -2,18 +2,14 @@ import java.io.FileOutputStream;
 
 public class Lista4Odkodowanie {
 
-    public static long[] symbols = new long[256];
+    public static long[] symbolsCount = new long[256];
     public static long[] CumCount = new long[256];
     public static long totalCount = 0x00000000FFFFFFFFL;
     public static long lower, upper, tag;
     public static long totalNumberOfCharacters = 256;
 
     public static void main(String args[]) {
-        if (args.length != 2)
-            System.out.println("Podaj nazwe pliku input i output.");
-        else {
-            decodeFile(args[0], args[1]);
-        }
+        decodeFile("test", "test.mp3");
     }
 
     public static void decodeFile(String inputFile, String outputFile){
@@ -76,7 +72,7 @@ public class Lista4Odkodowanie {
                     }
                 }
 
-                symbols[symbol & 0xFF] += 1;
+                symbolsCount[symbol & 0xFF] += 1;
                 totalNumberOfCharacters += 1;
                 calculateCumCount();
 
@@ -93,9 +89,9 @@ public class Lista4Odkodowanie {
     }
 
     public static void calculateCumCount(){
-        CumCount[0] = symbols[0];
+        CumCount[0] = symbolsCount[0];
         for(int i = 1; i < CumCount.length; i++){
-            CumCount[i] = CumCount[i-1]+ symbols[i];
+            CumCount[i] = CumCount[i - 1] + symbolsCount[i];
         }
     }
 
@@ -144,8 +140,8 @@ public class Lista4Odkodowanie {
     }
 
     public static void initializeSymbolTable(){
-        for(int i = 0; i < symbols.length; i++){
-            symbols[i] = 1;
+        for (int i = 0; i < symbolsCount.length; i++) {
+            symbolsCount[i] = 1;
         }
     }
 
